@@ -11,6 +11,7 @@ import epd7in5
 from PIL import Image
 from PIL import ImageDraw
 from PIL import ImageFont
+import sys
 #import imagedata
 
 EPD_WIDTH = 640
@@ -28,7 +29,19 @@ parser.add_option("-T", "--show-timezones",
 (options, args) = parser.parse_args()
 Timezone = options.Timezone
 if options.ListTZ:
-    print(pytz.all_timezones) #https://stackoverflow.com/questions/13866926/is-there-a-list-of-pytz-timezones
+    import time
+    print("Printing Time Zones...Brace yourself.")
+    time.sleep(1)
+    for TIMEZONE in pytz.all_timezones:#https://stackoverflow.com/questions/13866926/is-there-a-list-of-pytz-timezones
+        print(TIMEZONE)
+        time.sleep(1)
+    sys.exit()
+
+if Timezone in pytz.all_timezones:
+    print("Timezone all clear.")
+else:
+    print("Timezone incorrect; use the -T option to check time zones")
+    sys.exit(1)
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
