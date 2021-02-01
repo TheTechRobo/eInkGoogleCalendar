@@ -25,6 +25,7 @@ parser.add_option("-t", "--timezone", dest="Timezone",
 parser.add_option("-T", "--show-timezones",
                   action = "store_true", dest="ListTZ",
                   help="show list of timezones and exit")
+parser.add_option("-a","--weather-api-key",dest="weatherapi",help="API key for OpenWeatherMap (optional)", default=None)
 
 (options, args) = parser.parse_args()
 Timezone = options.Timezone
