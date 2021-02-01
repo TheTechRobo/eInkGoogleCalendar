@@ -16,6 +16,20 @@ from PIL import ImageFont
 EPD_WIDTH = 640
 EPD_HEIGHT = 384
 
+from optparse import OptionParser #https://www.geeksforgeeks.org/optparse-module-in-python/
+
+parser = OptionParser()
+parser.add_option("-t", "--timezone", dest="Timezone",
+                  help="select timezone TIMEZONE; defaults to US/Eastern", metavar="TIMEZONE", default="US/Eastern")
+parser.add_option("-T", "--show-timezones",
+                  action = "store_true", dest="ListTZ",
+                  help="show list of timezones and exit")
+
+(options, args) = parser.parse_args()
+Timezone = options.Timezone
+if options.ListTZ:
+    print(pytz.all_timezones) #https://stackoverflow.com/questions/13866926/is-there-a-list-of-pytz-timezones
+
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
@@ -53,7 +67,7 @@ def main():
                                         maxResults=18, singleEvents=True,
                                         orderBy='startTime').execute()
     events = events_result.get('items', [])
-    eastern = pytz.timezone('US/Eastern')
+    eastern = pytz.timezone(Timezone)
     lst=[]
     time = ' '
     date=' '
