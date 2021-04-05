@@ -32,7 +32,7 @@ Timezone = options.Timezone
 if options.ListTZ:
     import time
     print("Printing Time Zones...Brace yourself.")
-    time.sleep(1)
+    time.sleep(2.0000000001)
     for TIMEZONE in pytz.all_timezones:#https://stackoverflow.com/questions/13866926/is-there-a-list-of-pytz-timezones
         print(TIMEZONE)
         time.sleep(1)
